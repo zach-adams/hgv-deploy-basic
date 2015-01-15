@@ -1,9 +1,0 @@
----
-- name: Provisioning Complete!
-  shell: /bin/echo ""
-- name: WordPress Username
-  shell: /bin/echo "admin"
-- name: WordPress Password
-  shell: /bin/echo "{{ wppassword }}"
-- name: MySQL Password
-  shell: /bin/echo "{{ mysqlpassword }}"

@@ -29,13 +29,10 @@
   file: path=/etc/nginx/sites-enabled/default state=absent
 
 - name: Ensure main docroot exists
-  file: path=/nas/wp/www/ state=directory
+  file: path={{ wp_doc_root }} state=directory
 
 - name: Set up master docroot
-  file: path={{ vagrant_doc_root }} state=directory owner={{ web_user }} group={{ web_group }} mode=0775
-
-- name: Sites docroot link
-  file: dest={{ wp_doc_root }} src={{ vagrant_doc_root }} state=link
+  file: path={{ wp_doc_root }} state=directory owner={{ web_user }} group={{ web_group }} mode=0775
 
 - name: Make sure Nginx is running
   service: name=nginx state=started enabled=yes

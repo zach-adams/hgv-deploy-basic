@@ -1,14 +1,14 @@
-- name: "Provision {{ enviro }} WP Databases"
-  mysql_db: name="wpe_{{ enviro }}" state=present
+- name: "Provision {{ wp_db_name }} WP Database"
+  mysql_db: name="{{ wp_db_name }}" state=present
 
-- name: "Grant {{ enviro }} WP users access to WP DBs"
-  mysql_user: name="wpe_{{ enviro }}" priv="wpe_{{ enviro }}.*:ALL" host="%" password={{ mysqlpassword }} state=present
+- name: "Grant {{ wp_db_user }} WP user access to WP DB {{ wp_db_name }}"
+  mysql_user: name="{{ wp_db_name }}" priv="{{ wp_db_name }}.*:ALL" host="%" password={{ wp_db_password }} state=present
 
-- name: "Grant {{ enviro }} WP users access to WP DBs"
-  mysql_user: name="wpe_{{ enviro }}" priv="wpe_{{ enviro }}.*:ALL" host="localhost" password={{ mysqlpassword }} state=present
+- name: "Grant {{ wp_db_user }} WP user access to WP DB  {{ wp_db_name }}"
+  mysql_user: name="{{ wp_db_name }}" priv="{{ wp_db_name }}.*:ALL" host="localhost" password={{ wp_db_password }} state=present
 
-- name: "Set up {{ enviro }} docroot"
-  file: path={{ wp_doc_root }}/{{ enviro }} state=directory owner={{ web_user }} group={{ web_group }}
+- name: "Set up {{ wp_doc_root }} docroot"
+  file: path={{ wp_doc_root }} state=directory owner={{ web_user }} group={{ web_group }}
 
 - name: "Set up {{ enviro }} virtualhost"
   template: src=etc/nginx/wordpress.conf dest=/etc/nginx/sites-available/{{ enviro }}.conf
@@ -25,11 +25,9 @@
   notify: nginx reload
 
 - name: "Download and install WordPress for {{ enviro }}"
-  command: /usr/local/bin/wp core download --path={{ wp_doc_root}}/{{ enviro }}
+  command: /usr/local/bin/wp core download --path={{ wp_doc_root}}
   sudo: yes
   sudo_user: "{{ web_user }}"
-  args:
-    creates: "{{ wp_doc_root }}/{{ enviro }}/license.txt"
 
 - name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
@@ -37,18 +35,18 @@
   sudo: no
 
 - name: "Create wp-config for {{ enviro }}"
-  template: src=wp/wp-config.php dest={{ wp_doc_root }}/{{ enviro }}/wp-config.php owner={{ web_user }} group={{ web_group }}
+  template: src=wp/wp-config.php dest={{ wp_doc_root }}/wp-config.php owner={{ web_user }} group={{ web_group }}
 
-- name: "Localconfig for {{ enviro }}"
-  template: src=wp/local-config.php dest={{ wp_doc_root }}/{{ enviro }}/local-config.php owner={{ web_user }} group={{ web_group }}
+- name: "Localconfig for {{ enviro }} WordPress"
+  template: src=wp/local-config.php dest={{ wp_doc_root }}/local-config.php owner={{ web_user }} group={{ web_group }}
 
-- name: "Object Cache for {{ enviro }}"
-  template: src=wp/object-cache.php dest={{ wp_doc_root }}/{{ enviro }}/wp-content/object-cache.php owner={{ web_user }} group={{ web_group }}
+- name: "Object Cache for {{ enviro }} WordPress"
+  template: src=wp/object-cache.php dest={{ wp_doc_root }}/wp-content/object-cache.php owner={{ web_user }} group={{ web_group }}
 
 - name: "Run the WP install for {{ enviro }}"
-  command: /usr/local/bin/wp core install --url={{ host }} --title="WP Engine {{ enviro }} Site" --admin_user=wordpress --admin_password={{ wppassword }} --admin_email="admin@example.com"
+  command: /usr/local/bin/wp core install --url={{ host }} --title="{{ wp_site_name }}" --admin_user={{ wp_admin_user }} --admin_password={{ wp_admin_password }} --admin_email="admin@example.com"
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
     #   run_once: true
-      chdir: "{{ wp_doc_root }}/{{ enviro }}"
+      chdir: "{{ wp_doc_root }}"
