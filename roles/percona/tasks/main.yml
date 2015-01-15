@@ -9,7 +9,7 @@
 #     - mysql restart
 
 - name: Install Percona GPG key
-  apt_key: data={{ lookup('file', '../templates/percona-gpg-key') }} state=present
+  apt_key: data="{{ lookup('file', '../templates/percona-gpg-key') }}" state=present
   tags: [ 'percona', 'database' ]
 
 - name: Enable Percona repo
