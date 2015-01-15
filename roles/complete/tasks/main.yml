@@ -5,5 +5,5 @@
   shell: /bin/echo "admin"
 - name: WordPress Password
   shell: /bin/echo "{{ wppassword }}"
-- name: MySQL Password:
+- name: MySQL Password
   shell: /bin/echo "{{ mysqlpassword }}"
