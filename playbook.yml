@@ -13,3 +13,4 @@
     - wp-cli
     - varnish
     - { role: wordpress, enviro: hhvm, tags: [ 'wordpress' ] }
+    - complete
