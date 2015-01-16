@@ -1,6 +1,6 @@
 # Mercury Vagrant (HGV) Deployment Playbook
 
-Click here for the full version
+[Click here for the full version](https://github.com/zach-adams/hgv-deploy-full)
 
 ## Introduction
 
@@ -16,6 +16,9 @@ This Playbook will setup:
 - **Nginx** (Customized for WordPress)
 - **Clean WordPress Install** (Latest Version)
 - **WP-CLI**
+- 
+
+*Basic version does not include Varnish, Memcached and APC
 
 ## Installation
 
