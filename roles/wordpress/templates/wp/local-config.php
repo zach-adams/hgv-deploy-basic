@@ -20,3 +20,4 @@ define('DB_COLLATE', '');
 
 
 define('WP_CACHE_KEY_SALT', '{{ wp_db_name }}_1');
+
