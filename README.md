@@ -17,7 +17,7 @@ This Playbook will setup:
 - **Clean WordPress Install** (Latest Version)
 - **WP-CLI**
 
-*Basic version does not include Varnish, Memcached and APC
+*Basic version does not include Varnish, Memcached and APC*
 
 ## Installation
 
