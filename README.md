@@ -18,7 +18,7 @@ This Playbook will setup:
 - **WP-CLI**
 - 
 
-*Basic version does not include Varnish, Memcached and APC
+*Basic version does not include Varnish, Memcached and APC*
 
 ## Installation
 
