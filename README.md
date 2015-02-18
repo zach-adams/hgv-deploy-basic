@@ -6,6 +6,8 @@
 
 This Ansible Playbook is designed to setup a [Mercury-Like](https://github.com/wpengine/hgv/) environment on a Production server without the configuration hassle. This playbook was forked from [WPEngine's Mercury Vagrant](https://github.com/wpengine/hgv/).
 
+Essentially this server setup is a LEMP server except it runs HHVM by default instead of PHP-FPM.
+
 *Note: Remeber not to run weird scripts on your server as root without reviewing them first. Please review this playbook to ensure I'm not installing malicious software.*
 
 This Playbook will setup:
