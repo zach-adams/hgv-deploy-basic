@@ -29,7 +29,7 @@ This Playbook will setup:
 2. Add Ansible with `sudo add-apt-repository ppa:rquillo/ansible`
 3. Update Apt with `sudo apt-get update && sudo apt-get upgrade`
 4. Install Git and Ansible with `sudo apt-get install ansible git`
-5. Clone this repository with `git clone https://github.com/zach-adams/hgv-deploy-full/`
+5. Clone this repository with `git clone https://github.com/zach-adams/hgv-deploy-basic`
 6. Edit `group_vars/all` with your specific details with `vim|emacs|nano group_vars/all`
 7. Edit `hosts` with your specific hostname `vim|emacs|nano hosts`
 8. Run Ansible with `ansible-playbook -i hosts playbook.yml`
